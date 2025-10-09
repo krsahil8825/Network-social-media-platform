@@ -3,12 +3,14 @@
 {% block title %}Contact Us | Network{% endblock %}
 
 {% block content %}
-<div class="my-5 mx-2 text-light bg-secondary p-3 rounded shadow-lg border border-secondary">
+<div class="container my-5 mx-2 text-light bg-medium-dark p-3 rounded shadow-lg border border-secondary">
 
-    <h2 class="text-uppercase fw-bold border-bottom pb-2 mb-4">Contact Us</h2>
+    <h2 class="text-uppercase fw-bold text-center pb-2 mb-4">Contact Us</h2>
+
+    <hr/>
 
     {% if user.is_authenticated %}
-        <p class="mb-4">
+        <p class="mb-4 text-center">
             Hello, <strong>{{ user.username }}</strong>!  
             You can reach out to us using the form below.
         </p>
@@ -24,8 +26,10 @@
                 <label for="message" class="form-label">Message</label>
                 <textarea name="message" id="message" class="form-control" rows="5" placeholder="Write your message..." required></textarea>
             </div>
-
-            <button type="submit" class="btn btn-success px-4">Send Message</button>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-success px-4 text-center">Send Message</button>
+            </div>
         </form>
 
     {% else %}

@@ -37,15 +37,20 @@
                 <li class="nav-item">
                     <a class="nav-link text-center" href="{% url 'user_profile' request.user.username %}">👤{{ request.user.username }}</a>
                 </li>
+                {% if request.user.is_superuser %}
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-warning text-white px-3 ms-2 border border-warning mb-2 mb-lg-0" href="{% url 'admin:index' %}">Admin</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link btn btn-danger text-white px-3 ms-2 border border-danger" href="{% comment %}{% url 'logout' %}{% endcomment %}">Logout</a>
+                    <a class="nav-link btn btn-danger text-white px-3 ms-2 border border-danger" href="{% url 'logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link btn btn-primary text-white px-3 ms-2 border border-primary" href="{% comment %}{% url 'login' %}{% endcomment %}">Login</a>
+                    <a class="nav-link btn btn-primary text-white px-3 ms-2 border border-primary" href="{% url 'login' %}">Login</a>
                 </li>
                 <li class="nav-item mt-2 mt-lg-0">
-                    <a class="nav-link btn btn-primary text-white px-3 ms-2 border border-primary" href="{% comment %}{% url 'signup' %}{% endcomment %}">Signup</a>
+                    <a class="nav-link btn btn-primary text-white px-3 ms-2 border border-primary" href="{% url 'register' %}">Signup</a>
                 </li>
                 {% endif %}
             </ul>
