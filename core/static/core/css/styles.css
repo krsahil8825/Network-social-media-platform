@@ -1,0 +1,11 @@
+.navbar-brand {
+    letter-spacing: 1px;
+}
+
+.nav-link.active {
+    color: #ffc107 !important;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}

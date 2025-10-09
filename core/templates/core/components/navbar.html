@@ -1,0 +1,54 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm px-2 px-lg-5">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-uppercase" href="{% url 'core_index' %}">
+            <img src="{% static 'core/images/logo.png' %}" alt="Network Logo" width="30" height="30" class="d-inline-block align-text-top me-2">
+            Network
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
+                <li class="nav-item w-100">
+                    <a class="nav-link text-center {% if request.resolver_match.url_name == 'core_index' %}active{% endif %}" href="{% url 'core_index' %}">
+                        Home
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link text-center {% if request.resolver_match.url_name == 'core_about' %}active{% endif %}" href="{% url 'core_about' %}">
+                        About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-center {% if request.resolver_match.url_name == 'core_contact' %}active{% endif %}" href="{% url 'core_contact' %}">
+                        Contact
+                    </a>
+                </li>
+            </ul>
+
+
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link text-center" href="#">👤{{ request.user.username }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-danger text-white px-3 ms-2 border border-danger" href="{% comment %}{% url 'logout' %}{% endcomment %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white px-3 ms-2 border border-primary" href="{% comment %}{% url 'login' %}{% endcomment %}">Login</a>
+                </li>
+                <li class="nav-item mt-2 mt-lg-0">
+                    <a class="nav-link btn btn-primary text-white px-3 ms-2 border border-primary" href="{% comment %}{% url 'signup' %}{% endcomment %}">Signup</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
