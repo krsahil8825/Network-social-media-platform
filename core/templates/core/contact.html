@@ -3,6 +3,36 @@
 {% block title %}Contact Us | Network{% endblock %}
 
 {% block content %}
-<h1>Contact Us</h1>
-<p>If you have any questions or feedback, feel free to reach out to us through this page.</p>
+<div class="my-5 mx-2 text-light bg-secondary p-3 rounded shadow-lg border border-secondary">
+
+    <h2 class="text-uppercase fw-bold border-bottom pb-2 mb-4">Contact Us</h2>
+
+    {% if user.is_authenticated %}
+        <p class="mb-4">
+            Hello, <strong>{{ user.username }}</strong>!  
+            You can reach out to us using the form below.
+        </p>
+
+        <form method="post" action="{% url 'core_contact' %}">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter your subject" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea name="message" id="message" class="form-control" rows="5" placeholder="Write your message..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success px-4">Send Message</button>
+        </form>
+
+    {% else %}
+        <div class="alert alert-warning mt-4" role="alert">
+            You need to <a href="{% comment %}{% url 'login' %} {% endcomment %}" class="alert-link">log in</a> to use the contact form.
+        </div>
+    {% endif %}
+
+</div>
 {% endblock %}
