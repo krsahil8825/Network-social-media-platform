@@ -1,3 +1,9 @@
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #6c757d #343a40;
+}
+
 .navbar-brand {
     letter-spacing: 1px;
 }
@@ -16,4 +22,23 @@
 
 .bg-medium-dark {
     background-color: #2b3035 !important;
+}
+
+.text-shadow-medium-dark {
+    text-shadow: 2px 2px 4px #2b3035 !important;
+}
+
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./../images/hero-bg-small.jpg') no-repeat left center !important;
+    background-size: cover !important;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./../images/hero-bg-full.jpg') no-repeat center center !important;
+        background-size: cover !important;
+        background-attachment: fixed !important;
+        /* background-position: center center !important;
+        background-attachment: fixed !important; */
+    }
 }
