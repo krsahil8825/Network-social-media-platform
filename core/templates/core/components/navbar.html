@@ -18,6 +18,12 @@
                         Home
                     </a>
                 </li>
+
+                <li class="nav-item w-100">
+                    <a class="nav-link text-center {% if request.resolver_match.url_name == 'feed_index' %}active{% endif %}" href="{% url 'feed_index' %}">
+                        Feed
+                    </a>
+                </li>
                 
                 <li class="nav-item">
                     <a class="nav-link text-center {% if request.resolver_match.url_name == 'core_about' %}active{% endif %}" href="{% url 'core_about' %}">
