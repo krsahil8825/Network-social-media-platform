@@ -1,0 +1,38 @@
+
+hr {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.box-width {
+    width: 260px !important;
+}
+
+.card-box-width {
+    width: 100% !important;
+}
+
+@media (min-width: 350px) {
+    .box-width {
+        width: 320px !important;
+    }
+}
+
+@media (min-width: 576px) {
+    .box-width {
+        width: 350px !important;
+    }
+
+}
+
+@media (min-width: 768px) {
+    .box-width {
+        width: 400px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .box-width {
+        width: 450px !important;
+    }
+}
