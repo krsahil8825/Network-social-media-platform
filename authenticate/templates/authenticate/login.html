@@ -1,0 +1,32 @@
+{% extends "./auth_layout.html" %}
+
+{% block title %}Welcome back Network | Login{% endblock %}
+
+{% block content %}
+
+<section class="auth-card">
+<h2 class="auth-title">Welcome Back</h2>
+
+{% if message %}
+    <div class="auth-message">{{ message }}</div>
+{% endif %}
+
+<form action="{% url 'login' %}" method="post" class="auth-form">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" name="username" placeholder="Username" autofocus required>
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required>
+    </div>
+    <button type="submit" class="btn-submit">Login</button>
+</form>
+
+<p class="auth-footer">
+    Don’t have an account? <a href="{% url 'register' %}">Register here</a>
+</p>
+</section>
+
+{% endblock %}
+
+

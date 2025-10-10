@@ -1,0 +1,34 @@
+{% extends "./auth_layout.html" %}
+{% block title %}Welcome to Network | Register{% endblock %}
+
+{% block content %}
+<section class="auth-card">
+    <h2 class="auth-title">Create Your Account</h2>
+
+    {% if message %}
+        <div class="auth-message">{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'register' %}" method="post" class="auth-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="username" placeholder="Username" autofocus required>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="confirmation" placeholder="Confirm Password" required>
+        </div>
+        <button type="submit" class="btn-submit">Register</button>
+    </form>
+
+    <p class="auth-footer">
+        Already have an account? <a href="{% url 'login' %}">Log In here</a>
+    </p>
+</section>
+{% endblock %}
+
