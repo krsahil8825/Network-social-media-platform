@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "admincontrol",
     "authenticate",
     "core",
+    "feed_and_posts",
     "users",
     "django.contrib.admin",
     "django.contrib.auth",

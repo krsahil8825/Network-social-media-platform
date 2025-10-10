@@ -1,0 +1,8 @@
+<nav>
+    <ul>
+        <li><a href="{% url 'feed_index' %}">Home</a></li>
+        {% if request.user.is_authenticated %}
+            <li><a href="{% url 'user_profile' request.user.username %}">Profile</a></li>
+        {% endif %}
+    </ul>
+</nav>
