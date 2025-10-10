@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="container">
-    <div class="my-5 mx-2 text-light bg-medium-dark p-3 rounded shadow-lg border border-secondary">
+    <div class="my-5 mx-auto text-light bg-medium-dark p-3 rounded shadow-lg border border-secondary" style="max-width: 600px;">
 
         <h2 class="text-uppercase fw-bold text-center pb-2 mb-4">Contact Us</h2>
 
@@ -17,22 +17,34 @@
                 You can reach out to us using the form below.
             </p>
 
-            <form method="post" action="{% url 'core_contact' %}">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="subject" class="form-label">Subject</label>
-                    <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter your subject" required>
+            {% if message_success %}
+                <div class="alert alert-success" role="alert">
+                    {{ message_success }}
                 </div>
+            {% elif message_unsuccess %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message_unsuccess }}
+                </div>
+            {% endif %}
 
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea name="message" id="message" class="form-control" rows="5" placeholder="Write your message..." required></textarea>
-                </div>
-                
-                <div class="text-center">
-                    <button type="submit" class="btn btn-success px-4 text-center">Send Message</button>
-                </div>
-            </form>
+            {% if not message_success %}
+                <form method="post" action="{% url 'core_contact' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject:</label>
+                        <input type="text" name="subject" id="subject" class="form-control" placeholder="Enter your subject" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message:</label>
+                        <textarea name="message" id="message" class="form-control" rows="5" placeholder="Write your message..." required></textarea>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success px-4 text-center">Send Message</button>
+                    </div>
+                </form>
+            {% endif %}
 
         {% else %}
             <div class="alert alert-warning mt-4" role="alert">

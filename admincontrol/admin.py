@@ -1,4 +1,5 @@
 from django.contrib import admin
+from core.models import ContactMessage
 from users.models import User
 
 
@@ -8,4 +9,9 @@ admin.site.index_title = "Admin Panel"
 admin.site.site_title = "Network Admin"
 
 # Register your models here.
+
+# users app models
 admin.site.register(User)
+
+# core app models
+admin.site.register(ContactMessage)
