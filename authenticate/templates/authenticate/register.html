@@ -5,6 +5,7 @@
 <section class="auth-card">
     <h2 class="auth-title">Create Your Account</h2>
 
+    {% comment %} Display registration error messages {% endcomment %}
     {% if message %}
         <div class="auth-message">{{ message }}</div>
     {% endif %}

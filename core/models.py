@@ -1,7 +1,7 @@
 from django.db import models
 from users.models import User
 
-# Create your models here.
+# Model to store contact messages sent by users
 class ContactMessage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     subject = models.CharField(max_length=255)

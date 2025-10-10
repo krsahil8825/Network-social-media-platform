@@ -7,8 +7,6 @@ from django.urls import reverse
 
 from users.models import User
 
-# Create your views here.
-
 
 # this help to create login functionality
 def login_view(request):

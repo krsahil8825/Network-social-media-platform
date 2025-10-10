@@ -11,12 +11,14 @@
 
         <hr/>
 
+        {% comment %} User can only send the contact form if authenticated {% endcomment %}
         {% if user.is_authenticated %}
             <p class="mb-4 text-center">
                 Hello, <strong>{{ user.username }}</strong>!  
                 You can reach out to us using the form below.
             </p>
 
+            {% comment %} Display success or error messages {% endcomment %}
             {% if message_success %}
                 <div class="alert alert-success" role="alert">
                     {{ message_success }}
@@ -27,6 +29,7 @@
                 </div>
             {% endif %}
 
+            {% comment %} Contact form is displayed only if there are no success messages {% endcomment %}
             {% if not message_success %}
                 <form method="post" action="{% url 'core_contact' %}">
                     {% csrf_token %}

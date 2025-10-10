@@ -8,7 +8,6 @@ admin.site.site_header = "Network Admin Control"
 admin.site.index_title = "Admin Panel"
 admin.site.site_title = "Network Admin"
 
-# Register your models here.
 
 # users app models
 admin.site.register(User)
