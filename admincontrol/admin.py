@@ -1,7 +1,7 @@
 from django.contrib import admin
 from core.models import ContactMessage
 from feed_and_posts.models import Post, Comment
-from users.models import User
+from users.models import User, Follow, Profile
 
 
 # This will modify the admin interface
@@ -18,6 +18,24 @@ class UserView(admin.ModelAdmin):
 
 
 admin.site.register(User, UserView)
+
+
+class ProfileView(admin.ModelAdmin):
+    list_display = ("user", "bio", "avatar_link")
+    search_fields = ("user__username", "bio")
+    list_filter = ("user__is_active",)
+
+
+admin.site.register(Profile, ProfileView)
+
+
+class FollowView(admin.ModelAdmin):
+    list_display = ("follower", "following")
+    search_fields = ("follower__username", "following__username")
+    list_filter = ("follower__is_active", "following__is_active")
+
+
+admin.site.register(Follow, FollowView)
 
 
 # core app models
@@ -45,5 +63,6 @@ class CommentView(admin.ModelAdmin):
     list_display = ("__str__", "user", "post", "created_at")
     search_fields = ("user__username", "post__title", "content")
     list_filter = ("created_at",)
+
 
 admin.site.register(Comment, CommentView)
