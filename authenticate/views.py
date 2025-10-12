@@ -14,22 +14,24 @@ def login_view(request):
 
         # Attempt to sign user in
         username = request.POST["username"]
+        username = username.strip() if username else ""
         if not username:
             return render(
                 request,
                 "authenticate/login.html",
                 {"message": "Username is required."},
             )
+        
         password = request.POST["password"]
-
+        password = password.strip() if password else ""
         if not password:
             return render(
                 request,
                 "authenticate/login.html",
                 {"message": "Password is required."},
             )
+        
         user = authenticate(request, username=username, password=password)
-
         # Check if authentication successful
         if user is not None:
             login(request, user)
@@ -53,7 +55,7 @@ def logout_view(request):
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
-
+        username = username.strip() if username else ""
         if not username:
             return render(
                 request,
@@ -62,7 +64,7 @@ def register(request):
             )
 
         email = request.POST["email"]
-
+        email = email.strip() if email else ""
         if not email:
             return render(
                 request,
@@ -70,7 +72,7 @@ def register(request):
                 {"message": "Email is required."},
             )
         password = request.POST["password"]
-
+        password = password.strip() if password else ""
         if not password:
             return render(
                 request,
@@ -79,7 +81,7 @@ def register(request):
             )
 
         confirmation = request.POST["confirmation"]
-
+        confirmation = confirmation.strip() if confirmation else ""
         if not confirmation:
             return render(
                 request,

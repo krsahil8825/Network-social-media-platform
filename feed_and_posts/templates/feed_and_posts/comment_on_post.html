@@ -1,6 +1,6 @@
 {% extends "./feed_layout.html" %}
 
-{% block title %}Explore and Enjoy | Network{% endblock %}
+{% block title %} Comment: {{ post_as_array.0.title | slice:":15" }}.. | Network{% endblock %}
 
 {% block content %}
 <div class="w-100 text-white">
@@ -12,13 +12,17 @@
         <hr class="flex-grow-1 border-light opacity-50 mb-3" >
     </div>
 
-
+    <div>
+        {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+        {% endif %}
+    </div>
 
     <form method="POST" class="mb-4 bg-secondary p-2 rounded-3">
         {% csrf_token %}
         <div class="mb-3">
             <label for="comment" class="form-label">Add a comment</label>
-            <textarea id="comment" name="content" class="form-control" rows="3"></textarea>
+            <textarea id="comment" name="content" class="form-control" rows="3" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary text-center w-100">Comment</button>
     </form>

@@ -36,6 +36,9 @@ def contact(request):
             message = request.POST.get("message")
             user = request.user
 
+            subject = subject.strip() if subject else ""
+            message = message.strip() if message else ""
+
             # Validate data
             if not subject or not message:
                 message_unsuccess = "Subject and message cannot be empty."

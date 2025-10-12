@@ -1,5 +1,5 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
 
 def profile_view(request, username):
-    return HttpResponse(f"Profile page of {username}")
+    return render(request, "users/index.html", {"username": username})

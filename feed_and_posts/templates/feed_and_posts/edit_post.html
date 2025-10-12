@@ -1,6 +1,6 @@
 {% extends './feed_layout.html' %}
 
-{% block title %}Edit Post | Network{% endblock %}
+{% block title %}Edit Post: {{ post.title | slice:":15" }}.. | Network{% endblock %}
 
 {% block content %}
 <div class="w-100 text-white p-3 bg-medium-dark rounded shadow-lg border border-light">

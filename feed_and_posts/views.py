@@ -29,6 +29,8 @@ def comment_on_post(request, request_slug):
 
     if request.method == 'POST':
         content = request.POST.get('content')
+
+        content = content.strip() if content else ''
         if content:
             Comment.objects.create(user=request.user, post=post, content=content)
             return redirect('comment_on_post', request_slug=request_slug)
@@ -63,6 +65,9 @@ def edit_post(request, request_slug):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
+
+        title = title.strip() if title else ''
+        content = content.strip() if content else ''
 
         if title and len(title) <= 255:
             post.title = title
@@ -113,6 +118,9 @@ def create_post(request):
             user = request.user
             title = request.POST.get('title')
             content = request.POST.get('content')
+
+            title = title.strip() if title else ''
+            content = content.strip() if content else ''
 
             # Check for duplicate posts by the same user with the same title and content
             if Post.objects.filter(user=user, title=title, content=content).exists():
