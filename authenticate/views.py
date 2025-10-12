@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
@@ -20,7 +20,8 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("core_index"))
+            next_url = request.GET.get("next") or request.POST.get("next")
+            return redirect(next_url if next_url else "core_index")
         else:
             return render(
                 request,

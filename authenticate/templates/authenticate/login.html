@@ -12,8 +12,9 @@
     <div class="auth-message">{{ message }}</div>
 {% endif %}
 
-<form action="{% url 'login' %}" method="post" class="auth-form">
+<form action="{% url 'login' %} " method="post" class="auth-form">
     {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
     <div class="form-group">
         <input type="text" name="username" placeholder="Username" autofocus required autocomplete="username">
     </div>

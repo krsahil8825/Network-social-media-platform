@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.csrf import csrf_exempt
 from .models import Post, Comment
 
 @login_required
@@ -10,6 +12,26 @@ def feed_index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'feed_and_posts/index.html', {'page_obj': page_obj})
+
+@login_required
+@csrf_exempt
+def like_post(request, request_slug):
+    if request.method == 'POST':
+        try:
+            post = get_object_or_404(Post, slug=request_slug)
+            user = request.user
+
+            if user in post.likes.all():
+                post.likes.remove(user)
+                liked = False
+            else:
+                post.likes.add(user)
+                liked = True
+
+            return JsonResponse({'liked': liked, 'total_likes': post.likes.count()}, status=200)
+        except Exception as e:
+            print(f"Error liking post: {e}")
+            return JsonResponse({'error': 'An error occurred while processing your request.'}, status=500)
 
 @login_required
 def create_post(request):
