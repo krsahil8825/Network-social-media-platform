@@ -13,6 +13,7 @@ def feed_index(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'feed_and_posts/index.html', {'page_obj': page_obj})
 
+
 @login_required
 @csrf_exempt
 def like_post(request, request_slug):

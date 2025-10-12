@@ -13,6 +13,10 @@ def about(request):
     return render(request, "core/about.html")
 
 
+def error_404_view(request, exception=None):
+    return render(request, "core/404.html", status=404)
+
+
 # Contact page view
 def contact(request):
     # Handle contact form submission

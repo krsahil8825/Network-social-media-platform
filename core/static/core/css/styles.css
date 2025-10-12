@@ -4,6 +4,16 @@ html {
     scrollbar-color: #6c757d #343a40;
 }
 
+.img-404 {
+    width: 200px;
+}
+
+@media (min-width: 580px) {
+    .img-404 {
+        width: 300px;
+    }
+}
+
 .navbar-brand {
     letter-spacing: 1px;
 }

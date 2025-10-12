@@ -1,0 +1,22 @@
+{% extends "./core_layout.html" %}
+{% load static %}
+
+{% block title %}Page Not Found | Network{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="my-5 mx-2 text-light bg-medium-dark p-5 rounded shadow-lg border border-secondary text-center">
+        {% comment %} <h1 class="display-1 fw-bold">404</h1> {% endcomment %}
+        <img src="{% static 'core/images/404.png' %}" alt="404 Not Found" class="img-fluid img-404">
+        <h2 class="text-uppercase fw-bold pb-2 mt-3">Page Not Found</h2>
+        <p class="mt-3 text-center">
+            Sorry, the page you are looking for does not exist. It might have been moved, deleted, 
+            or you may have typed the URL incorrectly.
+        </p>
+        <p class="text-center">
+            You can go back to the homepage or check other sections of <strong>Network</strong>.
+        </p>
+        <a href="{% url 'core_index' %}" class="btn btn-primary mt-3">Go to Homepage</a>
+    </div>
+</div>
+{% endblock %}
