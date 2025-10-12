@@ -1,0 +1,15 @@
+{% extends "./feed_layout.html" %}
+
+{% block title %} Posts from People You Follow | Network{% endblock %}
+
+{% block content %}
+<div class="w-100 text-white">
+
+    {% include "./components/card.html" with allposts=page_obj %}
+
+    <hr class="border-light opacity-50 mb-2"/>
+    
+    {% include "./components/pagination.html" with page_obj=page_obj %}
+
+</div>
+{% endblock %}

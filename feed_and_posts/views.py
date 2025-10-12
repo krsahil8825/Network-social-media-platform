@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from .models import Post, Comment
+from users.models import Follow
 
 
 @login_required
@@ -17,6 +18,16 @@ def feed_index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'feed_and_posts/index.html', {'page_obj': page_obj})
+
+
+@login_required
+def following_feed(request):
+    following_users = Follow.objects.filter(follower=request.user).values_list('following', flat=True)
+    posts = Post.objects.filter(user__in=following_users).order_by('-created_at')
+    paginator = Paginator(posts, 10)  # Show 10 posts per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'feed_and_posts/following_feed.html', {'page_obj': page_obj})
 
 
 @login_required

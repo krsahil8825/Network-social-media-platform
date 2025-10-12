@@ -4,6 +4,10 @@ html {
     scrollbar-color: #6c757d #343a40;
 }
 
+.hover-text-black:hover {
+    color: black !important;
+}
+
 .img-404 {
     width: 200px;
 }

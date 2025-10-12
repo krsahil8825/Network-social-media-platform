@@ -24,7 +24,28 @@
                         Feed
                     </a>
                 </li>
-                
+
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-semibold" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                            More
+                        </a>
+                        <ul class="dropdown-menu bg-dark border border-secondary shadow rounded-3 mt-2">
+                            <li>
+                                <a class="dropdown-item text-light py-2 hover-bg hover-text-black" href="{% url 'following_feed' %}">
+                                    Your Following Posts
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-light py-2 hover-bg hover-text-black" href="{% url 'user_profile' request.user.username %}">
+                                    Profile
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+
                 <li class="nav-item">
                     <a class="nav-link text-center {% if request.resolver_match.url_name == 'core_about' %}active{% endif %}" href="{% url 'core_about' %}">
                         About
