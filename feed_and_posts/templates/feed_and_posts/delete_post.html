@@ -1,0 +1,20 @@
+{% extends "./feed_layout.html" %}
+
+{% block title %}Explore and Enjoy | Network{% endblock %}
+
+{% block content %}
+<div class="w-100 text-white">
+    <h2 class="text-center text-danger fw-bold fs-4">Do you really want to delete this post?</h2>
+
+    <hr class="border-light opacity-50 mb-2"/>
+
+    {% include "./components/card.html" with allposts=post %}    
+
+    <form method="POST" class="mt-3">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger w-100">Confirm Deletion</button>
+        <a href="{% url 'feed_index' %}" class="btn btn-secondary w-100 mt-2">Cancel</a>
+    </form>
+
+</div>
+{% endblock %}

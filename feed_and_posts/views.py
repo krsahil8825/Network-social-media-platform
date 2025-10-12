@@ -14,6 +14,19 @@ def feed_index(request):
     return render(request, 'feed_and_posts/index.html', {'page_obj': page_obj})
 
 @login_required
+def delete_post(request, request_slug):
+    post = get_object_or_404(Post, slug=request_slug)
+
+    if request.user != post.user:
+        return redirect('404')
+
+    if request.method == 'POST':
+        post.delete()
+        return redirect('feed_index')
+
+    return render(request, 'feed_and_posts/delete_post.html', {'post': [post]})
+
+@login_required
 def edit_post(request, request_slug):
     post = get_object_or_404(Post, slug=request_slug)
 
