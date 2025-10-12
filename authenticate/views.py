@@ -14,7 +14,20 @@ def login_view(request):
 
         # Attempt to sign user in
         username = request.POST["username"]
+        if not username:
+            return render(
+                request,
+                "authenticate/login.html",
+                {"message": "Username is required."},
+            )
         password = request.POST["password"]
+
+        if not password:
+            return render(
+                request,
+                "authenticate/login.html",
+                {"message": "Password is required."},
+            )
         user = authenticate(request, username=username, password=password)
 
         # Check if authentication successful
@@ -40,9 +53,39 @@ def logout_view(request):
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
+
+        if not username:
+            return render(
+                request,
+                "authenticate/register.html",
+                {"message": "Username is required."},
+            )
+
         email = request.POST["email"]
+
+        if not email:
+            return render(
+                request,
+                "authenticate/register.html",
+                {"message": "Email is required."},
+            )
         password = request.POST["password"]
+
+        if not password:
+            return render(
+                request,
+                "authenticate/register.html",
+                {"message": "Password is required."},
+            )
+
         confirmation = request.POST["confirmation"]
+
+        if not confirmation:
+            return render(
+                request,
+                "authenticate/register.html",
+                {"message": "Password confirmation is required."},
+            )
 
         # Ensure password matches confirmation
         if password != confirmation:

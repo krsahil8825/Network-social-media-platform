@@ -41,15 +41,23 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link text-center" href="{% url 'user_profile' request.user.username %}">👤{{ request.user.username }}</a>
+                    <a class="nav-link text-center fs-5" href="{% url 'user_profile' request.user.username %}">
+                        <i class="bi bi-person-circle"></i> 
+                        <small>{{ request.user.username|slice:":10" }}{% if request.user.username|length > 10 %}...{% endif %}</small>
+                    </a>
                 </li>
                 {% if request.user.is_superuser %}
                     <li class="nav-item">
-                        <a class="nav-link btn btn-warning text-white px-3 ms-2 border border-warning mb-2 mb-lg-0" href="{% url 'admin:index' %}">Admin</a>
+                        <a class="nav-link btn btn-warning text-white px-3 ms-2 border border-warning mb-2 mb-lg-0" href="{% url 'admin:index' %}">
+                            <i class="bi bi-shield-lock"></i> 
+                            <small>Admin</small>
+                        </a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link btn btn-danger text-white px-3 ms-2 border border-danger" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link btn btn-danger text-white px-3 ms-2 border border-danger" href="{% url 'logout' %}">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
                 </li>
                 {% else %}
                 <li class="nav-item">

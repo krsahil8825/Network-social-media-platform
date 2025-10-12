@@ -51,7 +51,7 @@ def delete_post(request, request_slug):
         post.delete()
         return redirect('feed_index')
 
-    return render(request, 'feed_and_posts/delete_post.html', {'post': [post]})
+    return render(request, 'feed_and_posts/delete_post.html', {'post_as_array': [post]})
 
 @login_required
 def edit_post(request, request_slug):
