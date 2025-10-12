@@ -1,5 +1,6 @@
-import profile
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,29 @@ from django.contrib.auth.decorators import login_required
 from feed_and_posts.models import Post
 from .models import User, Profile, Follow
 from .utils import is_image_url
+
+@login_required
+@csrf_exempt
+def follow_toggle(request, username):
+    if request.method != "POST":
+        return JsonResponse({"error": "Invalid request method."}, status=400)
+
+    if request.user.username == username:
+        return JsonResponse({"error": "You cannot follow yourself."}, status=400)
+    
+    if not User.objects.filter(username=username).exists():
+        return JsonResponse({"error": "User does not exist."}, status=404)
+    
+    follow_user = get_object_or_404(User, username=username)
+    follower = request.user
+
+    if Follow.objects.filter(follower=follower, following=follow_user).exists():
+        follow_instance = get_object_or_404(Follow, follower=follower, following=follow_user)
+        follow_instance.delete()
+        return JsonResponse({"status": "unfollowed", "message": f"You have unfollowed {username}."}, status=200)
+    else:
+        Follow.objects.create(follower=follower, following=follow_user)
+        return JsonResponse({"status": "followed", "message": f"You are now following {username}."}, status=200)
 
 
 @login_required
