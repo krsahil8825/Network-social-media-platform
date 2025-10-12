@@ -1,10 +1,52 @@
 {% extends "feed_and_posts/feed_layout.html" %}
 
-{% block title %}Profile - {{ username }}{% endblock %}
+{% block title %}Profile - {{ this_user.username }} | Network{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1 class="my-4">Profile: {{ username }}</h1>
-    <p>Welcome to the profile page of {{ username }}!</p>
+<div class="w-100 text-white">
+
+    <div class="card bg-dark text-white shadow-sm border-light p-3 mb-4">
+        <div class="d-flex align-items-center flex-column flex-md-row justify-content-center justify-content-md-start">
+            <img src="{{ this_user_profile.avatar_link|default:'https://cdn-icons-png.flaticon.com/512/149/149071.png' }}" 
+                alt="{{ this_user.username }} avatar"
+                class="rounded-circle border border-secondary me-3 mb-3 mb-md-0"
+                style="width: 80px; height: 80px; object-fit: cover;">
+
+            <div>
+                <h4 class="mb-1">{{ this_user.username }}</h4>
+                <p class="text-secondary mb-2">
+                    {{ this_user_profile.bio|default:"No bio available." }}
+                </p>
+
+                {% if request.user != this_user %}
+                <form  method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-light px-3">
+                        {% if is_following %}
+                            Unfollow
+                        {% else %}
+                            Follow
+                        {% endif %}
+                    </button>
+                </form>
+                {% endif %}
+
+                {% if request.user == this_user %}
+                    <a href="{% url 'edit_profile' username=this_user.username %}" class="btn btn-sm btn-outline-light px-3">
+                        Edit Profile
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <hr class="border-light opacity-50 mb-2"/>
+
+    {% include "feed_and_posts/components/card.html" with allposts=page_obj %}
+
+    <hr class="border-light opacity-50 mb-2"/>
+    
+    {% include "feed_and_posts/components/pagination.html" with page_obj=page_obj %}
+
 </div>
 {% endblock %}

@@ -16,7 +16,7 @@
             {{ eachpost.content }}
         </p>
 
-        {% if request.resolver_match.url_name == "feed_index" or request.resolver_match.url_name == "comment_on_post" %}
+        {% if request.resolver_match.url_name == "feed_index" or request.resolver_match.url_name == "comment_on_post" or request.resolver_match.url_name == "user_profile" %}
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <form action="{% url 'like_post' eachpost.slug %}" method="POST" class="like-form d-inline">
