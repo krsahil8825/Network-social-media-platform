@@ -1,0 +1,32 @@
+{% extends './feed_layout.html' %}
+
+{% block title %}Edit Post | Network{% endblock %}
+
+{% block content %}
+<div class="w-100 text-white p-3 bg-medium-dark rounded shadow-lg border border-light">
+    <h2 class="text-center mb-4">Edit Post</h2>
+
+    {% if message %}
+        <div class="alert alert-warning text-center" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Post Title</label>
+            <input type="text" class="form-control bg-dark text-light border-light" id="title" name="title" placeholder="Enter post title" value="{{ post.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="content" class="form-label">Post Content</label>
+            <textarea class="form-control bg-dark text-light border-light" id="content" name="content" rows="5" placeholder="Write your post content here..." required>{{ post.content }}</textarea>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-light btn-lg px-5">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

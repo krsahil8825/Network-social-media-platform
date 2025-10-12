@@ -13,6 +13,32 @@ def feed_index(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'feed_and_posts/index.html', {'page_obj': page_obj})
 
+@login_required
+def edit_post(request, request_slug):
+    post = get_object_or_404(Post, slug=request_slug)
+
+    if request.user != post.user:
+        return redirect('404')
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+
+        if title and len(title) <= 255:
+            post.title = title
+        else:
+            return render(request, 'feed_and_posts/edit_post.html', {'post': post, 'message': 'Title cannot be empty or exceed 255 characters.'})
+
+        if content:
+            post.content = content
+        else:
+            return render(request, 'feed_and_posts/edit_post.html', {'post': post, 'message': 'Content cannot be empty.'})
+
+        post.save()
+        return redirect('feed_index')
+
+    return render(request, 'feed_and_posts/edit_post.html', {'post': post})
+
 
 @login_required
 @csrf_exempt
