@@ -12,7 +12,7 @@ class Post(models.Model):
     likes = models.ManyToManyField(User, blank=True, related_name="liked_posts")
 
     def __str__(self):
-        return f"Post by {self.user.username} on {self.created_at} - {self.title:.20}"
+        return f"Post Title: {self.title:.20}... by {self.user.username}"
 
 
 class Comment(models.Model):
@@ -22,4 +22,4 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Comment by {self.user.username} on {self.post.title:.20} - {self.created_at}"
+        return f"Comment: {self.content[:20]}... "

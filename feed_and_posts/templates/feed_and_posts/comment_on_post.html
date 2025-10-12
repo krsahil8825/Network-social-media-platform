@@ -1,0 +1,46 @@
+{% extends "./feed_layout.html" %}
+
+{% block title %}Explore and Enjoy | Network{% endblock %}
+
+{% block content %}
+<div class="w-100 text-white">
+
+    {% include "./components/card.html" with allposts=post_as_array %}
+    
+    <div class="d-flex align-items-center my-2">
+        <h3 class="fw-bold fs-4 mb-0 me-3">Comments</h3>
+        <hr class="flex-grow-1 border-light opacity-50 mb-3" >
+    </div>
+
+
+
+    <form method="POST" class="mb-4 bg-secondary p-2 rounded-3">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="comment" class="form-label">Add a comment</label>
+            <textarea id="comment" name="content" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary text-center w-100">Comment</button>
+    </form>
+
+    {% for each_comment in comments %}
+        <div class="card bg-secondary text-light border-0 shadow-sm rounded-3 w-100 mx-auto mb-4">
+            <div class="card-body p-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div class="d-flex align-items-center">
+                        <a href="{% url 'user_profile' each_comment.user.username %}" class="mb-0 fw-semibold fs-6 text-white text-decoration-none">@{{ each_comment.user.username }}</a>
+                    </div>
+                    <small class="text-light-50 small">{{ each_comment.created_at|date:"M d, Y" }}</small>
+                </div>
+
+                <p class="card-text text-light-75 small mb-3">
+                    {{ each_comment.content }}
+                </p>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center">No comments yet. Be the first to comment!</p>
+    {% endfor %}
+
+</div>
+{% endblock %}

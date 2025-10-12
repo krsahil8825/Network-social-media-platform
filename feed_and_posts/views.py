@@ -13,8 +13,30 @@ def feed_index(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'feed_and_posts/index.html', {'page_obj': page_obj})
 
+
+@login_required
+def comment_on_post(request, request_slug):
+    if not Post.objects.filter(slug=request_slug).exists():
+        return redirect('404')
+    
+    post = get_object_or_404(Post, slug=request_slug)
+    comments = Comment.objects.filter(post=post).order_by('-created_at')
+
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            Comment.objects.create(user=request.user, post=post, content=content)
+            return redirect('comment_on_post', request_slug=request_slug)
+        else:
+            return render(request, 'feed_and_posts/comment_on_post.html', {'post_as_array': [ post], 'message': 'Comment cannot be empty.'})
+
+    return render(request, 'feed_and_posts/comment_on_post.html', {'post_as_array': [post], 'comments': comments})
+
 @login_required
 def delete_post(request, request_slug):
+    if not Post.objects.filter(slug=request_slug).exists():
+        return redirect('404')
+    
     post = get_object_or_404(Post, slug=request_slug)
 
     if request.user != post.user:

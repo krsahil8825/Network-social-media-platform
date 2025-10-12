@@ -9,4 +9,4 @@ class ContactMessage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Message from {self.user.username if self.user else 'Anonymous'}: {self.subject:.20}..."
+        return f"Message: {self.subject:.20}..."
