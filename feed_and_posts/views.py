@@ -5,6 +5,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from .models import Post, Comment
 
+
+@login_required
+def post_inedex(request):
+    return redirect('feed_index')
+
 @login_required
 def feed_index(request):
     posts = Post.objects.all().order_by('-created_at')
