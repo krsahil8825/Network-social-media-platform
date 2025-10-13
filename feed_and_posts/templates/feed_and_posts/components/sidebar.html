@@ -1,0 +1,62 @@
+{% load static %}
+
+{% if request.user.is_authenticated %}
+    <div class="col-md-3 mb-2 w-100">
+        <div class="card bg-black text-white border-0 shadow-sm rounded-3">
+            <div class="card-body">
+
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ request.user.profile.avatar_link|default:'https://cdn-icons-png.flaticon.com/512/149/149071.png' }}" alt="Profile Picture"
+                        class="rounded-circle me-3" width="50" height="50">
+                    <div>
+                        <h6 class="mb-0">{{ request.user.username|title }}</h6>
+                        <small class="text-secondary">@{{ request.user.username }}</small>
+                    </div>
+                </div>
+
+                <hr class="border-secondary opacity-25 my-2">
+
+                <h6 class="text-uppercase text-secondary small fw-bold mb-2">About Network</h6>
+                <p class="text-secondary small">
+                    Network is a place to share your thoughts, ideas, and experiences with 
+                    a growing community of developers, learners, and creators. Stay inspired 
+                    and build connections that matter.
+                </p>
+
+                <hr class="border-secondary opacity-25 my-3">
+
+                <h6 class="text-uppercase text-secondary small fw-bold mb-2">Quick Links</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2">
+                        <a href="{% url 'user_profile' request.user.username %}" class="text-decoration-none text-light">
+                            <i class="bi bi-person-lines-fill me-2"></i> Your Profile
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'create_post' %}" class="text-decoration-none text-light">
+                            <i class="bi bi-pencil-square me-2"></i> Create a Post
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'following_feed' %}" class="text-decoration-none text-light">
+                            <i class="bi bi-people me-2"></i> Following
+                        </a>
+                    </li>
+                </ul>
+
+                <hr class="border-secondary opacity-25 my-3">
+
+                <h6 class="text-uppercase text-secondary small fw-bold mb-2">More Options</h6>
+                <ul class="list-unstyled small mb-0">
+                    <li><a href="{% url 'core_about' %}" class="text-decoration-none text-light">About</a></li>
+                    <li><a href="{% url 'core_contact' %}" class="text-decoration-none text-light">Contact</a></li>
+                </ul>
+
+                <hr class="border-secondary opacity-25 my-3">
+
+                <p class="text-secondary small">Copyright &copy; <script>document.write(new Date().getFullYear())</script> Network. All rights reserved.</p>
+                <p class="text-secondary small">Developed By <a href="https://github.com/krsahil8825" class="text-decoration-none text-light fw-bold">Kumar Sahil</a></p>
+            </div>
+        </div>
+    </div>
+{% endif %}
