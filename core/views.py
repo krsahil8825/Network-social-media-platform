@@ -26,7 +26,10 @@ def contact(request):
         if not request.user.is_authenticated:
             message_unsuccess = "You need to be logged in to send a message."
             return render(
-                request, "core/contact.html", {"message_unsuccess": message_unsuccess}
+                request,
+                "core/contact.html",
+                {"message_unsuccess": message_unsuccess},
+                status=403,
             )
 
         # Process the form data
