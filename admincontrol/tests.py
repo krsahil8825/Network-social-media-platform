@@ -1,8 +1,7 @@
 from django.test import TestCase, Client
-from django.urls import reverse
 from django.contrib import admin
-from users.models import User, Profile, Follow
-from feed_and_posts.models import Post, Comment
+from users.models import User, Profile
+from feed_and_posts.models import Post
 from core.models import ContactMessage
 
 
