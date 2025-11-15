@@ -14,15 +14,16 @@ def about(request):
 
 
 def error_404_view(request, exception=None):
+    # custom 404 handler
     return render(request, "core/404.html", status=404)
 
 
 # Contact page view
 def contact(request):
-    # Handle contact form submission
+    # handle form submit
     if request.method == "POST":
 
-        # Check if user is authenticated
+        # must be logged in
         if not request.user.is_authenticated:
             message_unsuccess = "You need to be logged in to send a message."
             return render(
@@ -32,17 +33,17 @@ def contact(request):
                 status=403,
             )
 
-        # Process the form data
+        # read form fields
         try:
-            # Extract form data
             subject = request.POST.get("subject")
             message = request.POST.get("message")
             user = request.user
 
+            # trim input
             subject = subject.strip() if subject else ""
             message = message.strip() if message else ""
 
-            # Validate data
+            # validation
             if not subject or not message:
                 message_unsuccess = "Subject and message cannot be empty."
                 return render(
@@ -51,7 +52,7 @@ def contact(request):
                     {"message_unsuccess": message_unsuccess},
                 )
 
-            # Check for duplicate messages
+            # check duplicates
             if ContactMessage.objects.filter(
                 user=user, subject=subject, message=message
             ).exists():
@@ -60,20 +61,20 @@ def contact(request):
                     request, "core/contact.html", {"message_success": message_success}
                 )
 
-            # Save the message to the database
+            # save message
             ContactMessage.objects.create(user=user, subject=subject, message=message)
             message_success = "Your message has been sent successfully."
             return render(
                 request, "core/contact.html", {"message_success": message_success}
             )
 
-        # Handle unexpected errors
         except Exception as e:
+            # fallback error
             print("Error:", e)
             message_unsuccess = "There was an error sending your message."
             return render(
                 request, "core/contact.html", {"message_unsuccess": message_unsuccess}
             )
 
-    # For GET requests, simply render the contact page
+    # GET request → normal page render
     return render(request, "core/contact.html")

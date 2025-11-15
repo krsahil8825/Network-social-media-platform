@@ -10,7 +10,7 @@ admin.site.index_title = "Admin Panel"
 admin.site.site_title = "Network Admin"
 
 
-# users app models
+# users app User models admin view
 class UserView(admin.ModelAdmin):
     list_display = ("username", "email", "is_active", "is_staff", "date_joined")
     search_fields = ("username", "email")
@@ -20,6 +20,7 @@ class UserView(admin.ModelAdmin):
 admin.site.register(User, UserView)
 
 
+# users app Profile model admin view
 class ProfileView(admin.ModelAdmin):
     list_display = ("user", "bio", "avatar_link")
     search_fields = ("user__username", "bio")
@@ -29,6 +30,7 @@ class ProfileView(admin.ModelAdmin):
 admin.site.register(Profile, ProfileView)
 
 
+# users app Follow model admin view
 class FollowView(admin.ModelAdmin):
     list_display = ("follower", "following")
     search_fields = ("follower__username", "following__username")
@@ -38,7 +40,7 @@ class FollowView(admin.ModelAdmin):
 admin.site.register(Follow, FollowView)
 
 
-# core app models
+# core app ContactMessage model admin view
 class ContactMessageView(admin.ModelAdmin):
     list_display = ("__str__", "user__username", "user__email", "created_at")
     search_fields = ("user__username", "subject", "message")
@@ -48,7 +50,7 @@ class ContactMessageView(admin.ModelAdmin):
 admin.site.register(ContactMessage, ContactMessageView)
 
 
-# feed_and_posts app models
+# feed_and_posts app Post model admin view
 class PostView(admin.ModelAdmin):
     list_display = ("__str__", "user", "created_at")
     search_fields = ("user__username", "title", "content")
@@ -59,6 +61,7 @@ class PostView(admin.ModelAdmin):
 admin.site.register(Post, PostView)
 
 
+# feed_and_posts app Comment model admin view
 class CommentView(admin.ModelAdmin):
     list_display = ("__str__", "user", "post", "created_at")
     search_fields = ("user__username", "post__title", "content")

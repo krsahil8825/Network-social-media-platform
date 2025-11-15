@@ -3,6 +3,7 @@ from users.models import User
 import uuid
 
 
+# Model to represent a social media post
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(default=uuid.uuid4, unique=True, editable=False)
@@ -15,6 +16,7 @@ class Post(models.Model):
         return f"Post Title: {self.title:.20}... by {self.user.username}"
 
 
+# Model to represent comments on posts
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")

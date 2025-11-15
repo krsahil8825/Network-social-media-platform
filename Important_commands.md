@@ -8,7 +8,4 @@
 - `python manage.py makemigrations` : Creates new migrations based on the changes detected to your models.
 - `python manage.py migrate` : Applies database migrations.
 - `python manage.py createsuperuser` : Creates a new superuser account for the admin site.
-- `python manage.py shell` : Opens the Django interactive shell.
-- `python manage.py collectstatic` : Collects static files into the directory specified by `STATIC_ROOT`.
 - `python manage.py test` : Runs the test suite for your Django application.
-- `python manage.py loaddata <fixture_name>` : Loads data from a fixture into the database.
