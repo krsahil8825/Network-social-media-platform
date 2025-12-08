@@ -39,6 +39,17 @@
 
                 <p class="card-text text-light-75 small mb-3">
                     {{ each_comment.content }}
+
+                    {% if each_comment.user == request.user %}
+                        <div>
+                            <a href="{% url 'edit_comment' each_comment.id %}" class="btn btn-outline-warning btn-sm me-2 py-0 px-2">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'delete_comment' each_comment.id %}" class="btn btn-outline-danger btn-sm py-0 px-2">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    {% endif %}
                 </p>
             </div>
         </div>

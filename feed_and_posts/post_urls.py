@@ -8,4 +8,6 @@ urlpatterns = [
     path("edit/<slug:request_slug>/", views.edit_post, name="edit_post"),
     path("<slug:request_slug>/delete/", views.delete_post, name="delete_post"),
     path("<slug:request_slug>/comment/", views.comment_on_post, name="comment_on_post"),
+    path("comment/<int:comment_id>/delete/", views.delete_comment, name="delete_comment"),
+    path("comment/<int:comment_id>/edit/", views.edit_comment, name="edit_comment"),
 ]

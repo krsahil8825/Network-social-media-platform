@@ -39,6 +39,65 @@ def following_feed(request):
     # Render following feed
     return render(request, "feed_and_posts/following_feed.html", {"page_obj": page_obj})
 
+@login_required
+def edit_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    # Only the comment owner can edit
+    if request.user != comment.user:
+        return redirect("404")
+
+    if request.method == "POST":
+        content = request.POST.get("content")
+        content = content.strip() if content else ""
+
+        # Prevent empty comment
+        if content:
+            comment.content = content
+            comment.save()
+            return redirect("comment_on_post", request_slug=comment.post.slug)
+        else:
+            return render(
+                request,
+                "feed_and_posts/edit_comment.html",
+                {
+                    "comment": comment,
+                    "message": "Comment cannot be empty.",
+                },
+            )
+
+    return render(
+        request,
+        "feed_and_posts/edit_comment.html",
+        {"comment": comment},
+    )
+
+
+@login_required
+def delete_comment(request, comment_id):
+    if request.method == "POST":
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        # Only the comment owner can delete
+        if request.user != comment.user:
+            return redirect("404")
+
+        post_slug = comment.post.slug
+        comment.delete()
+        return redirect("comment_on_post", request_slug=post_slug)
+    if request.method == "GET":
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        # Only the comment owner can delete
+        if request.user != comment.user:
+            return redirect("404")
+
+        return render(
+            request,
+            "feed_and_posts/delete_comment.html",
+            {"comment": comment},
+        )
+
 
 @login_required
 def comment_on_post(request, request_slug):
