@@ -1,141 +1,210 @@
-# Network - A Minimal Social Media Platform Built with Django
+# Network - Social Media Platform
 
-**Network** is a lightweight social platform built with Django that demonstrates core social-media features such as posting, following, liking, and commenting.
-This project is ideal for learners exploring Django, developers studying app architecture, or anyone looking for a clean base to extend.
+A modern, feature-rich social media platform built with Django. I've created Network to provide users with a seamless experience for connecting, sharing, and engaging with their community.
+
+## Overview
+
+Network is a full-featured social media application that enables users to create profiles, share posts, engage with content through likes and comments, and build meaningful connections by following other users. The platform prioritizes user experience, security, and scalability.
 
 ## Features
 
-### **Authentication (`authenticate` app)**
+### 🔐 Authentication & Authorization
 
--   User registration with validation
--   Secure session-based login/logout
--   Templates: `login.html`, `register.html`
+-   **User Registration**: I've implemented a secure registration system with validation and password protection
+-   **Login System**: Secure authentication mechanism with session management
+-   **Custom User Model**: Extends Django's built-in user model for flexibility and future scalability
+-   **Protected Routes**: Ensure only authenticated users can access sensitive features
 
-### **User Profiles & Following (`users` app)**
+### 👥 User Profiles
 
--   Profile view and edit pages
--   Follow/Unfollow with AJAX (`static/users/js/follow.js`)
--   “Following Feed” to display posts from followed users
+-   **Profile Management**: I enable users to create and customize their profiles with bio and avatar
+-   **Profile Viewing**: Browse other users' profiles and view their contributions
+-   **Profile Editing**: Users can update their information easily through an intuitive interface
 
-### **Posts, Likes & Comments (`feed_and_posts` app)**
+### 🔗 Social Connections
 
--   Create, edit, delete, and view posts
--   Comment system with validation
--   Like/Unlike functionality using AJAX (`static/feed_and_posts/js/like.js`)
--   Pagination for large feeds with reusable templates
+-   **Follow System**: I've implemented a robust follow/unfollow feature to build user networks
+-   **Follower/Following Lists**: Track connections and view user networks
+-   **Relationship Management**: Seamless interface to manage social connections
 
-### **Core Pages (`core` app)**
+### 📝 Posts & Content
 
--   Static pages (About, Contact)
--   Shared layout with navbar and footer components
+-   **Create Posts**: Users can share thoughts and content with title and detailed content
+-   **Edit Posts**: I allow users to modify their posts after creation
+-   **Delete Posts**: Users maintain full control over their content
+-   **Post Feed**: I've created a personalized feed showing posts from users you follow
+-   **All Posts Feed**: Browse the complete network feed with pagination
 
-### **Admin Tools (`admincontrol` app)**
+### ❤️ Engagement Features
 
--   Custom admin page extensions and moderation utilities
+-   **Like System**: I've implemented real-time like functionality for posts with AJAX
+-   **Comment on Posts**: Users can engage in discussions through post comments
+-   **Edit Comments**: Modify comments after posting
+-   **Delete Comments**: Remove unwanted comments with full control
 
-## Architecture & Tech Stack
+### 🎯 Additional Features
 
--   **Framework**: Django 5.2.x
--   **Database**: SQLite (default for development)
--   **Templates**: Organized per app
--   **Static Files**: JS/CSS stored inside each app’s `static/` directory
+-   **Admin Control Panel**: I provide administrative capabilities for platform management
+-   **About Section**: Information about the platform
+-   **Contact Page**: Users can reach out for support or feedback
+-   **Responsive Design**: I've ensured the platform works seamlessly across all devices
+-   **Pagination**: Efficient content loading with paginated feeds
+-   **404 Error Handling**: User-friendly error pages for better experience
 
-## Installation (Windows / PowerShell)
+## Tech Stack
 
-1. **Create and activate a virtual environment**
+### Backend
 
-```powershell
-python -m venv .venv; .\.venv\Scripts\Activate.ps1
-```
+-   **Django 5.2.7**: Modern Python web framework
+-   **Python**: Core language for backend development
+-   **SQLite**: Database for data persistence
 
-2. **Install dependencies**
+### Frontend
 
-```powershell
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-```
+-   **HTML5**: Semantic markup structure
+-   **CSS3**: Responsive and modern styling
+-   **JavaScript**: Dynamic client-side interactions
 
-3. **Apply migrations & create superuser (optional)**
+### Tools & Libraries
 
-```powershell
-python manage.py migrate
-python manage.py createsuperuser
-```
+-   **Django Admin**: Built-in admin interface for management
+-   **Django ORM**: Database abstraction layer
+-   **Django Templates**: Server-side template rendering
 
-4. **Start the development server**
+## Installation
 
-```powershell
-python manage.py runserver
-```
+### Prerequisites
 
-Open the site at: **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
+-   Python 3.8 or higher
+-   pip (Python package manager)
+-   Virtual environment support
 
-## Running Tests
+### Setup Instructions
 
-Execute the full test suite:
+1. **Clone the Repository**
 
-```powershell
-python manage.py test
-```
+    ```bash
+    git clone https://github.com/krsahil8825/Network-social-media-platform.git
+    cd Network
+    ```
 
-### Test coverage includes:
+2. **Create Virtual Environment**
 
--   Authentication (login, registration, invalid input handling)
--   Authorization rules (only owners can edit/delete posts)
--   Post CRUD operations
--   Follow/Unfollow logic with idempotency checks
--   Like system and duplicate prevention
--   Comment validation
--   Pagination boundaries and empty feed handling
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
 
-## Defensive & Robust Behavior
+3. **Install Dependencies**
 
--   Server-side form validation on all user input
--   Ownership and authentication checks for sensitive actions
--   Idempotent like/follow endpoints
--   Template auto-escaping for XSS safety
--   Graceful handling of pagination edge-cases
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## Continuous Integration (GitHub Actions)
+4. **Run Migrations**
 
-Workflow found at: `/.github/workflows/test.yaml`
+    ```bash
+    python manage.py migrate
+    ```
 
-What it does:
+5. **Create Superuser (Admin)**
 
--   Installs dependencies
--   Runs full Django test suite on every push/PR to `main`
--   Ensures only passing code is merged
+    ```bash
+    python manage.py createsuperuser
+    ```
+
+6. **Start Development Server**
+
+    ```bash
+    python manage.py runserver
+    ```
+
+7. **Access the Application**
+    - Main Application: `http://localhost:8000`
+    - Admin Panel: `http://localhost:8000/admin`
 
 ## Project Structure
 
 ```
-/manage.py
-/requirements.txt
-/db.sqlite3
-/README.md
-
-/network/                  # Django project config
-/authenticate/             # Login & registration
-/users/                    # Profiles, follow system
-/feed_and_posts/           # Posts, likes, comments, feeds
-/core/                     # Static pages, shared layout
-/admincontrol/             # Admin utilities
-/static/                   # JS/CSS per app
-/templates/                # Organized by app
-/.github/workflows/        # CI configuration
+Network/
+├── authenticate/          # User authentication and registration
+├── core/                  # Core application with about and contact
+├── feed_and_posts/        # Posts, comments, and feed management
+├── users/                 # User profiles and social connections
+├── admincontrol/          # Admin functionality
+├── network/               # Project settings and configuration
+├── static/                # CSS, JavaScript, and images
+├── templates/             # HTML templates
+├── db.sqlite3             # SQLite database
+├── manage.py              # Django management script
+└── requirements.txt       # Python dependencies
 ```
+
+## Usage Guide
+
+### For Users
+
+1. **Register & Login**: Create an account and log in to the platform
+2. **Complete Your Profile**: Add a bio and avatar to personalize your profile
+3. **Start Following**: Discover and follow other users to build your network
+4. **Create Posts**: Share your thoughts with meaningful titles and content
+5. **Engage**: Like posts and comment on content from others
+6. **Manage Content**: Edit or delete your posts and comments anytime
+
+### For Administrators
+
+-   Access the admin panel at `/admin`
+-   Manage users, posts, comments, and platform settings
+-   Monitor user activity and ensure community guidelines
+
+## Dependencies
+
+I've used the following key dependencies:
+
+-   `Django==5.2.7` - Web framework
+-   `asgiref==3.10.0` - ASGI support
+-   `sqlparse==0.5.3` - SQL parsing
+-   `tzdata==2025.2` - Timezone data
+-   `validators==0.35.0` - Data validation
+-   `requests==2.32.5` - HTTP library
+
+For complete list, see [requirements.txt](requirements.txt).
+
+## Future Enhancements
+
+I'm planning to add the following features:
+
+-   **Direct Messaging**: Private communication between users
+-   **Notifications**: Real-time updates for user interactions
+-   **Search Functionality**: Discover users and posts easily
+-   **Trending Tags**: Popular content discovery
+-   **Media Upload**: Support for images and videos in posts
+-   **User Recommendations**: Personalized friend suggestions
+-   **Dark Mode**: Enhanced user interface options
 
 ## Contributing
 
+I welcome contributions to make Network better! If you have suggestions or improvements:
+
 1. Fork the repository
-2. Create a feature branch
-3. Add or update tests if needed
-4. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Follow Django conventions for project layout and naming.
+## License
 
-## License & Contact
+I've licensed this project under the MIT License. See the [LICENSE](LICENSE) file for details.
 
--   **License**: MIT
--   **Author**: Kumar Sahil
+## Contact
+
+I'd love to hear from you! For questions, feedback, or collaboration:
+
+-   **GitHub**: [krsahil8825](https://github.com/krsahil8825)
 -   **Email**: [krsahil8825@gmail.com](mailto:krsahil8825@gmail.com)
+
+## Acknowledgments
+
+I'd like to thank the Django community for the excellent framework and documentation that made this project possible.
+
+**Made with ❤️ by Kumar Sahil**
