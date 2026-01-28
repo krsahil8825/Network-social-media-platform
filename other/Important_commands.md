@@ -14,3 +14,14 @@
 - `uv sync`: Installs dependencies from the `pyproject.toml` file using the 'uv' tool.
 - `uv run python manage.py migrate` : Applies database migrations using the 'uv' tool.
 - `uv run gunicorn network.wsgi:application --bind 0.0.0.0:$PORT` : Command to run the Django application using Gunicorn server.
+- `uv run python manage.py collectstatic --noinput` : Collects static files for deployment using the 'uv' tool.
+
+Build: 
+```bash
+uv sync && uv run python manage.py migrate && uv run python manage.py collectstatic --noinput
+```
+
+Start:
+```bash
+uv run gunicorn network.wsgi:application --bind 0.0.0.0:$PORT
+```
