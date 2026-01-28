@@ -56,7 +56,6 @@ sentry_sdk.db
 
 # dotenv
 .env
-.env.*
 
 # Celery
 celerybeat-schedule
@@ -114,5 +113,8 @@ coverage/
 # Ignore build artifacts from IDEs/CI
 *.log
 *.tmp
+
+# Docker
+mysql
 
 # End of file
