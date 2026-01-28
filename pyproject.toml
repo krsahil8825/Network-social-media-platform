@@ -1,6 +1,6 @@
 [project]
 name = "Network"
-dynamic = ["version"]
+version = "0.1.1"
 authors = [{ name = "Kumar Sahil", email = "krsahil8825@gmail.com" }]
 maintainers = [{ name = "Kumar Sahil", email = "krsahil8825@gmail.com" }]
 description = "A social media platform built with Django."
