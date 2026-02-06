@@ -117,7 +117,8 @@ if DB_ENGINE == "mysql":
             "OPTIONS": {
                 "ssl": {
                     "ca": BASE_DIR / "certs" / "ca.pem",
-                }
+                },
+                "ssl_mode": "VERIFY_IDENTITY",
             },
         }
     }
