@@ -37,7 +37,10 @@ if not SECRET_KEY:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-if not DEBUG and not TESTING:
+# Production security settings
+ENVIRONMENT = os.getenv("ENV", "production").lower()
+
+if ENVIRONMENT == "production" and not DEBUG and not TESTING :
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True

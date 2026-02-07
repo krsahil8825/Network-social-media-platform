@@ -26,3 +26,5 @@ urlpatterns = [
     path("post/", include("feed_and_posts.post_urls")),
     path("u/", include("users.urls")),
 ]
+
+handler404 = "core.views.error_404_view"

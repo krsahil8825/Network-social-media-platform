@@ -30,6 +30,7 @@ jobs:
         env:
           SECRET_KEY: ci-test-secret-key
           DB_ENGINE: sqlite
+          ENV: development
         run: |
           uv run python manage.py migrate
 
@@ -37,5 +38,6 @@ jobs:
         env:
           SECRET_KEY: ci-test-secret-key
           DB_ENGINE: sqlite
+          ENV: development
         run: |
           uv run python manage.py test --verbosity=2
